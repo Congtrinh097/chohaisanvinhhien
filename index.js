@@ -31,6 +31,21 @@ server.route([
         path:'/api/v1/users',
         handler: UserController.addUsers
     },
+    {
+        method:'PUT',
+        path:'/api/v1/users',
+        handler: UserController.updateUser
+    },
+    {
+        method:'DELETE',
+        path:'/api/v1/users',
+        handler: UserController.deleleUser
+    },
+    {
+        method:'GET',
+        path:'/api/v1/users/{id}',
+        handler: UserController.detailUser
+    },
 ]);
 
 // Start the server
