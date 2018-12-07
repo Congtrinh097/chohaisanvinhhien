@@ -2,6 +2,14 @@ const hapi = require('hapi');
 const mongosee = require('mongoose');
 const config = require('./configs')
 const UserController = require('./controllers/UserController');
+
+/* swagger section */
+const Inert = require('inert');
+const Vision = require('vision');
+const HapiSwagger = require('hapi-swagger');
+const Pack = require('./package');
+
+
 const server = hapi.server({
     port: config.server.port,
     host: config.server.host});
@@ -24,26 +32,46 @@ server.route([
     {
         method:'GET',
         path:'/api/v1/users',
+        config: {
+            description: 'Get all the users',
+            tags: ['api', 'v1', 'users']
+        },
         handler: UserController.getUsers
     },
     {
         method:'POST',
         path:'/api/v1/users',
+        config: {
+            description: 'add a new user',
+            tags: ['api', 'v1', 'users']
+        },
         handler: UserController.addUsers
     },
     {
         method:'PUT',
         path:'/api/v1/users',
+        config: {
+            description: 'update a user',
+            tags: ['api', 'v1', 'users']
+        },
         handler: UserController.updateUser
     },
     {
         method:'DELETE',
         path:'/api/v1/users',
+        config: {
+            description: 'delete a user by id',
+            tags: ['api', 'v1', 'users']
+        },
         handler: UserController.deleleUser
     },
     {
         method:'GET',
         path:'/api/v1/users/{id}',
+        config: {
+            description: 'get detail a user by id',
+            tags: ['api', 'v1', 'users'],
+        },
         handler: UserController.detailUser
     },
 ]);
@@ -52,6 +80,19 @@ server.route([
 async function start() {
 
     try {
+        await server.register([
+            Inert,
+            Vision,
+            {
+                plugin: HapiSwagger,
+                options: {
+                    info: {
+                        title: 'Paintings API Documentation',
+                        version: Pack.version
+                    }
+                }
+            }
+        ]);
         await server.start();
     }
     catch (err) {
