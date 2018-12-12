@@ -2,6 +2,7 @@ const hapi = require('hapi');
 const mongosee = require('mongoose');
 const config = require('./configs')
 const UserController = require('./controllers/UserController');
+const CateController = require('./controllers/CateController');
 
 /* swagger section */
 const Inert = require('inert');
@@ -73,6 +74,52 @@ server.route([
             tags: ['api', 'v1', 'users'],
         },
         handler: UserController.detailUser
+    },
+    // route for cate
+    {
+        method:'GET',
+        path:'/api/v1/cates',
+        config: {
+            description: 'Get all the cate',
+            tags: ['api', 'v1', 'cates']
+        },
+        handler: CateController.getCates
+    },
+    {
+        method:'POST',
+        path:'/api/v1/cates',
+        config: {
+            description: 'add a new cate',
+            tags: ['api', 'v1', 'cates']
+        },
+        handler: CateController.addCate
+    },
+    {
+        method:'PUT',
+        path:'/api/v1/cates',
+        config: {
+            description: 'update a cate',
+            tags: ['api', 'v1', 'cates']
+        },
+        handler: CateController.updateCate
+    },
+    {
+        method:'DELETE',
+        path:'/api/v1/cates',
+        config: {
+            description: 'delete a user by id',
+            tags: ['api', 'v1', 'cates']
+        },
+        handler: CateController.deleleCate
+    },
+    {
+        method:'GET',
+        path:'/api/v1/cates/{id}',
+        config: {
+            description: 'get detail a user by id',
+            tags: ['api', 'v1', 'cates'],
+        },
+        handler: CateController.detailCate
     },
 ]);
 
