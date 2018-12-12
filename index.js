@@ -148,6 +148,6 @@ async function start() {
     }
 
     console.log('Server running at:', server.info.uri);
-};
+}
 
 start();
