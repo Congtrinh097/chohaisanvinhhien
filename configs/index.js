@@ -2,8 +2,8 @@ const db = require('./db');
 const server = require('./server');
 
 var configs = {
-    db,
-    server
-}
+	db,
+	server
+};
 
 module.exports = configs;
