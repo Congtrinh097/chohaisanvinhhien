@@ -1,0 +1,40 @@
+/* Create two columns/boxes that floats next to each other */
+nav {
+    float: left;
+    width: 15%;
+    min-width: 200px;
+    height: 690px; /* only for demonstration, should be removed */
+    background: #ccc;
+    padding: 20px;
+  }
+  
+  /* Style the list inside the menu */
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+   /* Style the list inside the menu */
+   nav ul li {
+    padding: 15px;
+    font-size: 20;
+    background: #cccccc;
+    border-bottom: 2px solid yellow;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  
+   /* Style the list inside the menu */
+   nav ul li a {
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+
+  
+   /* Style the list inside the menu */
+   nav ul li:hover {
+    background: #009124;
+    border-bottom: 2px solid rebeccapurple 
+  }
