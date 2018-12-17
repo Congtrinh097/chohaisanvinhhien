@@ -12,6 +12,7 @@ import { UsersComponent } from './users/users.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { ProductsComponent } from './products/products.component';
 import { OrdersComponent } from './orders/orders.component';
+import { AddUserComponent } from './users/add-user/add-user.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { OrdersComponent } from './orders/orders.component';
     CategoriesComponent,
     ProductsComponent,
     OrdersComponent,
+    AddUserComponent,
   ],
   imports: [
     BrowserModule,

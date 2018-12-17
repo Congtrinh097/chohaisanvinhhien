@@ -1,14 +1,18 @@
 <h3>Users list</h3>
-<table>
+<a routerlink="users/add">Add new!</a>
+<table width="4000">
   <tr>
-    <th>Company</th>
-    <th>Contact</th>
-    <th>Country</th>
+    <th>User name</th>
+    <th>Password</th>
+    <th>Action</th>
   </tr>
   <tr *ngFor="let user of users">
     <td>{{user.username}}</td>
     <td>{{user.password}}</td>
-    <td>Note</td>
+    <td>
+      <button>Delete</button>
+      <button>Detail</button>
+    </td>
   </tr>
 
 </table>

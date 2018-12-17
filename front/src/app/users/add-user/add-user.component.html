@@ -1,0 +1,7 @@
+<h1>Add new user</h1>
+  
+<form name="useraddnew" ng-submit="addNewUser()">
+    <input type="text" name="username" ng-model="username" required />
+    <input type="text" name="password" ng-model="password" required />
+    <button ng-disabled="useraddnew.$invalid" ng-click="addNewUser()">Add</button>
+</form>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 import { UserService } from '../services/user.service'
 import { User } from '../models/User';
 
@@ -10,7 +11,7 @@ import { User } from '../models/User';
 export class UsersComponent implements OnInit {
 
   users: User[];
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
   
   getUsers(): void {
     this.userService.getUsers().subscribe(users=>this.users = users);
@@ -21,6 +22,8 @@ export class UsersComponent implements OnInit {
     console.log(this.users);
   }
 
- 
+  onClickAdd() {
+    this.router.navigate(['/add'])
+  }
 
 }
