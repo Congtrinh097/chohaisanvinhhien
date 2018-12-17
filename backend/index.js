@@ -14,13 +14,17 @@ const Pack = require('./package');
 
 const server = hapi.server({
 	port: config.server.port,
-	host: config.server.host});
+	host: config.server.host,
+	routes: {cors: true}
+});
 
 mongosee.connect(`mongodb://${config.db.user}:${config.db.password}@ds227594.mlab.com:27594/chohaisanvinhhien`);
 
 mongosee.connection.once('open', ()=> {
 	console.log(' conected to database');
 });
+
+
 // Add the route
 server.route([
 	{
