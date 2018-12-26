@@ -13,8 +13,8 @@ const Pack = require('./package');
 
 
 const server = hapi.server({
-	 port: process.env.PORT || 3000,
-	//host: config.server.host,
+	port: process.env.PORT || config.server.port,
+	host: process.env.HOST || config.server.host,
 	routes: {cors: true}
 });
 
