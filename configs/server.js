@@ -1,6 +1,6 @@
 
 var server  = {
-	port: 4000,
+	port: 80,
 	host: 'localhost'
 };
 
