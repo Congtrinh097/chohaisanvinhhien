@@ -16,7 +16,7 @@ var UserController = {
 	updateUser: (req) => {
 		let option = { new: true };
 		let data = {
-			password: req.payload.passwords
+			password: req.payload.password
 		};
 		return User.findByIdAndUpdate(req.payload.id,data,option);        
 	},
