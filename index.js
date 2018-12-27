@@ -64,7 +64,7 @@ server.route([
 	},
 	{
 		method:'DELETE',
-		path:'/api/v1/users',
+		path:'/api/v1/users/{id}',
 		config: {
 			description: 'delete a user by id',
 			tags: ['api', 'v1', 'users']

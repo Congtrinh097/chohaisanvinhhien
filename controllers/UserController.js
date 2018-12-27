@@ -21,7 +21,7 @@ var UserController = {
 		return User.findByIdAndUpdate(req.payload.id,data,option);        
 	},
 	deleleUser: (req) => {
-		return User.findOneAndDelete({_id: req.payload.id});     
+		return User.findOneAndDelete({_id: req.params.id});     
 	},
 	detailUser: (req) => {
 		return User.findOne({_id: req.params.id});
