@@ -13,7 +13,8 @@ const Pack = require('./package');
 
 
 const server = hapi.server({
-	 port: process.env.PORT || 3000,
+	// eslint-disable-next-line no-undef
+	port: process.env.PORT || 3000,
 	//host: config.server.host,
 	routes: {cors: true}
 });
@@ -79,6 +80,15 @@ server.route([
 			tags: ['api', 'v1', 'users'],
 		},
 		handler: UserController.detailUser
+	},
+	{
+		method:'POST',
+		path:'/api/v1/login',
+		config: {
+			description: 'login with account and password',
+			tags: ['api', 'v1', 'login']
+		},
+		handler: UserController.loginAccount
 	},
 	// route for cate
 	{
