@@ -1,10 +1,11 @@
 /* eslint-disable no-console */
 const hapi = require('hapi');
+const jwt = require('jsonwebtoken');
+const Boom = require('boom');
 const mongosee = require('mongoose');
 const config = require('./configs');
 const UserController = require('./controllers/UserController');
 const CateController = require('./controllers/CateController');
-
 /* swagger section */
 const Inert = require('inert');
 const Vision = require('vision');
@@ -25,6 +26,34 @@ mongosee.connection.once('open', ()=> {
 	console.log(' conected to database');
 });
 
+const scheme = function () {
+	return  {
+		authenticate: function (request, h) {
+
+			const req = request.raw.req;
+			const authorization = req.headers.authorization;
+			if (!authorization) {
+				throw Boom.unauthorized(null, 'Custom');
+			}
+
+			jwt.verify(authorization, config.server.secrectKey ,{}, (err , result)=>{
+
+				if (err) {
+					throw Boom.unauthorized(err.message);
+				}
+
+				if (result) {
+					return h.authenticated({ credentials: { user: result } });
+				}
+			});
+			
+			return h.authenticated({ credentials: { } });
+		}
+	};
+};
+
+server.auth.scheme('auth', scheme);
+server.auth.strategy('token', 'auth');
 
 // Add the route
 server.route([
@@ -32,7 +61,7 @@ server.route([
 		method:'GET',
 		path:'/',
 		handler:()=> {
-    
+		
 			return 'Welcome to API for chohaisanvinhhien.vn';
 		}
 	},
@@ -40,6 +69,7 @@ server.route([
 		method:'GET',
 		path:'/api/v1/users',
 		config: {
+			auth: 'token',
 			description: 'Get all the users',
 			tags: ['api', 'v1', 'users']
 		},
@@ -49,6 +79,7 @@ server.route([
 		method:'POST',
 		path:'/api/v1/users',
 		config: {
+			auth: 'token',
 			description: 'add a new user',
 			tags: ['api', 'v1', 'users']
 		},
@@ -58,6 +89,7 @@ server.route([
 		method:'PUT',
 		path:'/api/v1/users',
 		config: {
+			auth: 'token',
 			description: 'update a user',
 			tags: ['api', 'v1', 'users']
 		},
@@ -67,6 +99,7 @@ server.route([
 		method:'DELETE',
 		path:'/api/v1/users/{id}',
 		config: {
+			auth: 'token',
 			description: 'delete a user by id',
 			tags: ['api', 'v1', 'users']
 		},
@@ -76,6 +109,7 @@ server.route([
 		method:'GET',
 		path:'/api/v1/users/{id}',
 		config: {
+			auth: 'token',
 			description: 'get detail a user by id',
 			tags: ['api', 'v1', 'users'],
 		},
@@ -95,6 +129,7 @@ server.route([
 		method:'GET',
 		path:'/api/v1/cates',
 		config: {
+			auth: 'token',
 			description: 'Get all the cate',
 			tags: ['api', 'v1', 'cates']
 		},
@@ -104,6 +139,7 @@ server.route([
 		method:'POST',
 		path:'/api/v1/cates',
 		config: {
+			auth: 'token',
 			description: 'add a new cate',
 			tags: ['api', 'v1', 'cates']
 		},
@@ -113,6 +149,7 @@ server.route([
 		method:'PUT',
 		path:'/api/v1/cates',
 		config: {
+			auth: 'token',
 			description: 'update a cate',
 			tags: ['api', 'v1', 'cates']
 		},
@@ -122,6 +159,7 @@ server.route([
 		method:'DELETE',
 		path:'/api/v1/cates',
 		config: {
+			auth: 'token',
 			description: 'delete a user by id',
 			tags: ['api', 'v1', 'cates']
 		},
@@ -131,6 +169,7 @@ server.route([
 		method:'GET',
 		path:'/api/v1/cates/{id}',
 		config: {
+			auth: 'token',
 			description: 'get detail a user by id',
 			tags: ['api', 'v1', 'cates'],
 		},

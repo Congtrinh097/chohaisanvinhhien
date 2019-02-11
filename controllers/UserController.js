@@ -1,5 +1,7 @@
 /* eslint-disable no-console */
 const User = require('../models/User');
+const jwt = require('jsonwebtoken');
+const config = require('../configs');
 
 var UserController = {
 	getUsers:() => {
@@ -28,14 +30,15 @@ var UserController = {
 		return User.findOne({_id: req.params.id});
 	}, 
 	loginAccount: async(req) => {
-	
 		const {username , password} = req.payload;
+	
 		let user = await User.findOne({username: username});
 		if (!user) {
 			return { code: 404, message: 'User not found!' };
 		}else {
 			if (user.password == password) {
-				return { code: 200, message: 'Login successful!' };
+				var token = jwt.sign({user: user}, config.server.secrectKey);
+				return { code: 200, token: token, message: 'Login successful!' };
 			}else {
 				return { code: 404, message: 'Password is not corrected!' };
 			}

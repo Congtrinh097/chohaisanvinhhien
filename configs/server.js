@@ -1,7 +1,8 @@
 
 var server  = {
 	port: 80,
-	host: 'localhost'
+	host: 'localhost',
+	secrectKey: 'SECRECT_KEY'
 };
 
 module.exports = server;
