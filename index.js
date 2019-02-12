@@ -157,7 +157,7 @@ server.route([
 	},
 	{
 		method:'DELETE',
-		path:'/api/v1/cates',
+		path:'/api/v1/cates/{id}',
 		config: {
 			auth: 'token',
 			description: 'delete a user by id',

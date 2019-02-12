@@ -25,7 +25,7 @@ var CateController = {
 		return Cate.findByIdAndUpdate(req.payload.id,data,option);        
 	},
 	deleleCate: (req) => {
-		return Cate.findOneAndDelete({_id: req.payload.id});     
+		return Cate.findOneAndDelete({_id: req.params.id});   
 	},
 	detailCate: (req) => {
 		return Cate.findOne({_id: req.params.id});
