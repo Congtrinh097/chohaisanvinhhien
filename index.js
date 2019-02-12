@@ -6,6 +6,7 @@ const mongosee = require('mongoose');
 const config = require('./configs');
 const UserController = require('./controllers/UserController');
 const CateController = require('./controllers/CateController');
+const ProductController = require('./controllers/ProductController');
 /* swagger section */
 const Inert = require('inert');
 const Vision = require('vision');
@@ -174,6 +175,57 @@ server.route([
 			tags: ['api', 'v1', 'cates'],
 		},
 		handler: CateController.detailCate
+	},
+	// route for products
+	{
+		method:'GET',
+		path:'/api/v1/products',
+		config: {
+			auth: 'token',
+			description: 'Get all the products',
+			tags: ['api', 'v1', 'products']
+		},
+		handler: ProductController.getProducts
+	},
+	{
+		method:'POST',
+		path:'/api/v1/products',
+		config: {
+			auth: 'token',
+			description: 'add a new product',
+			tags: ['api', 'v1', 'products']
+		},
+		handler: ProductController.addProduct
+	},
+	{
+		method:'PUT',
+		path:'/api/v1/products',
+		config: {
+			auth: 'token',
+			description: 'update a product',
+			tags: ['api', 'v1', 'products']
+		},
+		handler: ProductController.updateProduct
+	},
+	{
+		method:'DELETE',
+		path:'/api/v1/products/{id}',
+		config: {
+			auth: 'token',
+			description: 'delete a product by id',
+			tags: ['api', 'v1', 'products']
+		},
+		handler: ProductController.deleleProduct
+	},
+	{
+		method:'GET',
+		path:'/api/v1/products/{id}',
+		config: {
+			auth: 'token',
+			description: 'get detail a products by id',
+			tags: ['api', 'v1', 'products'],
+		},
+		handler: ProductController.detailProduct
 	},
 ]);
 
